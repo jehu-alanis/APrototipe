@@ -1,19 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const myRoutes = require('./routes/myRoutes');
-
-dotenv.config();
-
+const cors = require('cors');
 const app = express();
-
-app.set('view engine', 'ejs');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/', myRoutes);
-
 const PORT = process.env.PORT || 3000;
+
+// Middleware para habilitar CORS
+app.use(cors());
+
+// Middleware para parsear JSON
+app.use(express.json());
+
+// Importar y montar las rutas
+const clientesRoutes = require('./routes/clientes');
+app.use('/clientes', clientesRoutes);
+
+// Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+//inicializar firebase
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
